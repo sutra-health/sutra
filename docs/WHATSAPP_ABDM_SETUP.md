@@ -44,7 +44,7 @@ Do not configure Chatwoot and direct SUTRA webhooks for the same number. Split o
 - Named clinical and operational owners for each routing team.
 - Approved utility templates in each supported language.
 
-For the hackathon, use a Meta test number or approved project number with synthetic data. A successful test-number exchange is real WhatsApp integration but is not production approval.
+For the demonstration environment, use a Meta test number or approved project number with synthetic data. A successful test-number exchange is real WhatsApp integration but is not production approval.
 
 ## 3. Configure Meta and Chatwoot
 

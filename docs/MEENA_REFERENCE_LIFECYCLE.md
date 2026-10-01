@@ -1,7 +1,8 @@
 # Meena reference lifecycle
 
-This is SUTRA's executable reference journey. It is derived from slides 7–11 of
-the current v4 pitch deck and uses only synthetic people, identifiers, clinical
+This is SUTRA's reference patient journey: one synthetic patient, Meena, and her
+caregiver, Ravi, followed from first contact to the doctor's treatment decision.
+It is executable, and it uses only synthetic people, identifiers, clinical
 details and dates. It is not a patient record and it is not evidence of a live
 ABDM integration or measured clinical outcome.
 
@@ -41,8 +42,9 @@ uses a separate hard-coded copy of this journey.
 | 25 Sep, 08:52 | Dr Kulkarni | The doctor opens the original beside the extraction and records the treatment decision. | Evidence progresses `received → verified → reviewed`; the clinician's decision is a separate event. | Only the clinician decides whether treatment proceeds. |
 | After review | SUTRA and Ravi | The doctor-approved update is delivered and later echo/cycles/referral/follow-up remain visible. | Delivery receipts, open work and future due windows stay in the patient thread. | A delivery receipt proves delivery state, not comprehension or clinical outcome. |
 
-Slide 3's missed chair is the **without-SUTRA counterfactual**. It must not be
-combined with the successful Sep 14–25 reference journey as if both happened.
+The missed chemotherapy chair, in which a cycle is lost because a blood test was
+never booked, is the **without-SUTRA counterfactual**. It must not be combined
+with the successful Sep 14–25 reference journey as if both happened.
 
 ## What is interactive in the current reference build
 

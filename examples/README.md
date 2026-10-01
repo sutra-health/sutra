@@ -10,6 +10,6 @@ These examples keep vendor and deployment details outside the SUTRA domain. The 
 | [`abdm-sandbox`](./abdm-sandbox/) | Local ABDM bridge boundary using synthetic sandbox identities |
 | [`remote-grpc-adapter`](./remote-grpc-adapter/) | Hospital or vendor supplied adapter over authenticated gRPC |
 
-Files named `config.example.yaml` contain environment-variable references, not credentials. Files named `smoke-test.http` or `smoke-test.grpcurl.md` contain request templates. Substitute only synthetic identifiers in development and hackathon environments.
+Files named `config.example.yaml` contain environment-variable references, not credentials. Files named `smoke-test.http` or `smoke-test.grpcurl.md` contain request templates. Substitute only synthetic identifiers in development and demonstration environments.
 
 Every enabled adapter must pass capability discovery before its workflow is enabled. A static example manifest documents expected capabilities; the runtime `AdapterRegistry.Probe` response is authoritative.

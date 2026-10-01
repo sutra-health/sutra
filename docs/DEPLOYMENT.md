@@ -44,7 +44,7 @@ OpenMRS Mini is an example integration. Replace its adapter without changing the
 - WhatsApp can use a real Meta test number, but must not contain patient data.
 - ABDM uses sandbox credentials only.
 
-### 3.2 Hackathon demonstration
+### 3.2 Demonstration environment
 
 - Synthetic or fully anonymised data only.
 - Real WhatsApp Business Cloud API test/approved number.

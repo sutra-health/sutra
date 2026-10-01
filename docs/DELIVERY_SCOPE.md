@@ -1,18 +1,31 @@
-# SUTRA hackathon scope
+# Delivery scope: reference implementation, supervised pilot, roadmap
 
-This file separates the working hackathon prototype from the supervised pilot and the longer product roadmap. It is the source of truth for demo narration, README claims and submission answers.
+This document separates SUTRA's reference implementation from the supervised pilot and the longer product roadmap. It is the source of truth for demonstration narration, README claims and any public description of what SUTRA does today.
 
-## 1. Hackathon alignment
+Three stages are used throughout:
+
+- **Reference implementation:** the code in this repository, run in a demonstration environment with synthetic data only.
+- **Supervised pilot:** a planned 90-day deployment at a hospital unit after site, security and clinical review. No pilot has started yet.
+- **Roadmap:** product directions that are not part of any current claim.
+
+Terms used in this document:
+
+- **EHR** (electronic health record) is the hospital's clinical record system.
+- **ABDM** (Ayushman Bharat Digital Mission) is India's national digital health framework, and an **ABHA** is the patient's ABDM health account number.
+- **OCR** (optical character recognition) reads text from photographs and scans.
+- **MCP** (Model Context Protocol) is an open protocol that lets AI tools inspect external systems.
+
+## 1. Product focus
 
 SUTRA addresses doctor-facing **Patient Follow-up and Continuity of Care**. It assists with documentation, navigation, booking, evidence collection and operational handoff. It does not diagnose, prescribe, replace clinical judgment, act as clinical decision support, interpret medical data or score risk.
 
-The demo uses only synthetic data. The reference environment uses OpenMRS Mini because it is an accessible open-source system against which the team can demonstrate a real read and appointment write. SUTRA itself is vendor-neutral and communicates with hospital systems through a Go/protobuf adapter contract.
+The reference implementation uses only synthetic data. The demonstration environment uses OpenMRS Mini, an open-source electronic health record (EHR), because it is an accessible system against which the team can demonstrate a real read and a real appointment write. SUTRA itself is vendor-neutral and communicates with hospital systems through a Go/protobuf adapter contract.
 
 ## 2. Delivery boundary
 
-### Working demo
+### Reference implementation
 
-The demo must implement one narrow closed loop:
+The reference implementation must complete one narrow closed loop:
 
 1. Open a synthetic patient through the OpenMRS Mini reference adapter.
 2. Show source-linked history without generating a clinical summary.
@@ -55,7 +68,7 @@ The demo must implement one narrow closed loop:
 
 ## 3. Capability classification
 
-| Capability | Demo | Pilot | Roadmap | Notes |
+| Capability | Reference | Pilot | Roadmap | Notes |
 |---|:---:|:---:|:---:|---|
 | OpenMRS Mini patient lookup | Yes | Yes |  | Reference adapter only |
 | Source-linked encounter history | Yes | Yes |  | No generated clinical summary |
@@ -67,20 +80,20 @@ The demo must implement one narrow closed loop:
 | One preconfigured signed pathway | Yes | Yes |  | Program Studio editing is pilot scope |
 | Scheduler slot read and booking | Yes | Yes |  | Reference scheduler path only |
 | Nightly booking reconciliation | Simulated or test job | Yes |  | Source remains authoritative |
-| WhatsApp simulator | Yes |  |  | Reliable offline demo path |
+| WhatsApp simulator | Yes |  |  | Reliable offline demonstration path |
 | Real WhatsApp test number | Optional | Yes |  | Depends on provider approval |
-| Evidence upload and original file | Yes | Yes |  | Synthetic file only in hackathon |
+| Evidence upload and original file | Yes | Yes |  | Synthetic file only in the reference implementation |
 | OCR of patient/type/date | Yes | Yes |  | No interpretation |
 | Clinical-value extraction | No | No | Possible research only | Never used for a clinical decision without separate approval |
 | Exact signed-plan answer | Yes | Yes |  | Retrieval only |
 | Human clinical handoff | Yes | Yes |  | No automated clinical answer |
 | Deterministic role routing | Yes | Yes |  | Deadline/SLA, not severity |
 | Emergency signposting | Yes | Yes |  | Fixed casualty and 112 message |
-| Clinical triage or risk score | No | No | No within SUTRA's stated product boundary | Out of hackathon scope |
+| Clinical triage or risk score | No | No | No within SUTRA's stated product boundary | Out of scope at every stage |
 | Admin primary KPI | Yes | Yes |  | Must show denominator and source |
 | Preset operational questions | Yes | Yes |  | Count/list only |
 | Free-form natural-language SQL | No | Limited after security review | Possible | Not required for the product claim |
-| ABDM M1/M2/M3 | Mock or disabled | Sandbox/approved scope | Yes | Not required for core demo |
+| ABDM M1/M2/M3 | Mock or disabled | Sandbox/approved scope | Yes | Not required for the core reference flow |
 | OpenELIS or pharmacy integration | No | Optional site work | Yes | Do not claim it is bundled with OpenMRS Mini |
 | E-prescription transmission | No | No initial pilot | Yes | Requires policy, consent and system integration |
 | MCP adapter tools | No | Optional read-only preview | Yes | Not in the runtime care path |
@@ -88,7 +101,7 @@ The demo must implement one narrow closed loop:
 
 ## 4. Safety correction: routing, not clinical triage
 
-The pitch uses family-question routing. Product and submission language must not describe this as AI clinical triage.
+SUTRA routes family questions to people. Product and public language must not describe this as AI clinical triage.
 
 ### Allowed behavior
 
@@ -115,7 +128,7 @@ The phrase safety net is not a complete emergency detector. It must never be pre
 
 ## 5. OCR and speech scope
 
-### Speech-to-text demo
+### Speech-to-text in the reference implementation
 
 - Record or replay Hindi or English clinician dictation.
 - Produce an editable draft.
@@ -124,9 +137,9 @@ The phrase safety net is not a complete emergency detector. It must never be pre
 - Log model/version, confidence where available and corrections.
 - Permit typing when the model or hardware is unavailable.
 
-The demo must not claim medical-scribe accuracy beyond the evidence available for the selected model. The clinician's confirmed text, not the audio or raw transcript, becomes the signed SUTRA artifact.
+The reference implementation must not claim medical-scribe accuracy beyond the evidence available for the selected model. The clinician's confirmed text, not the audio or raw transcript, becomes the signed SUTRA artifact.
 
-### OCR demo
+### OCR in the reference implementation
 
 - Preserve the original register page or synthetic report.
 - Extract only configured fields.
@@ -137,7 +150,7 @@ The demo must not claim medical-scribe accuracy beyond the evidence available fo
 
 No OCR result may trigger a treatment decision, interpret a clinical value or send an unverified prescription to a pharmacy.
 
-## 6. Demo surfaces
+## 6. Reference implementation surfaces
 
 ### Clinician app: Expo + React Native Web
 
@@ -176,13 +189,15 @@ No OCR result may trigger a treatment decision, interpret a clinical value or se
 
 ## 7. Reference deployment claim
 
-For the demo, SUTRA runs as separate containers inside the hospital-boundary network and connects to an already deployed OpenMRS Mini instance through the reference adapter. SUTRA has its own PostgreSQL database and evidence storage. It does not share the OpenMRS database and must not access it through undocumented direct writes.
+In the demonstration environment, SUTRA runs as separate containers inside the hospital-boundary network and connects to an already deployed OpenMRS Mini instance through the reference adapter. SUTRA has its own PostgreSQL database and evidence storage. It does not share the OpenMRS database and must not access it through undocumented direct writes.
 
 The Go adapter converts OpenMRS REST/FHIR and compatible appointment responses into SUTRA's versioned protobuf contracts. The core workflow consumes only those contracts. A CSV adapter demonstrates the fallback for hospitals without an API.
 
-WhatsApp remains an external provider channel. A local conversation simulator must exist so the live demo does not depend on provider availability. The same SUTRA messaging contract drives both transports.
+WhatsApp remains an external provider channel. A local conversation simulator must exist so that a live demonstration does not depend on provider availability. The same SUTRA messaging contract drives both transports.
 
-## 8. Five-week build order
+## 8. Reference build order
+
+The reference implementation was built in the following five-week order. It is kept here as the dependency order for anyone rebuilding or extending it.
 
 ### Week 1: Integration spine
 
@@ -209,12 +224,12 @@ WhatsApp remains an external provider channel. A local conversation simulator mu
 - Add clerk verification and doctor original-report view.
 - Compute the primary metric and show the event audit.
 
-### Week 5: Reliability and presentation
+### Week 5: Reliability and rehearsal
 
 - Add failure paths, retry/reconciliation fixtures and shadow mode.
 - Run accessibility, role, privacy and safety tests.
-- Produce seed/reset scripts and an offline demo path.
-- Rehearse the demo with network and model failures.
+- Produce seed/reset scripts and an offline demonstration path.
+- Rehearse the demonstration with network and model failures.
 
 ## 9. Live demonstration script
 
@@ -233,7 +248,7 @@ WhatsApp remains an external provider channel. A local conversation simulator mu
 13. Tap `Emergency` and show the fixed casualty and 112 instruction.
 14. End on the event ledger and the share of planned steps completed inside the approved window.
 
-## 10. Demo failure paths that must work
+## 10. Failure paths that must work
 
 - OpenMRS unavailable: show a visible connection error; do not fabricate a patient.
 - Scheduler timeout: keep the request pending and tell the caregiver that confirmation is still in progress.
@@ -244,11 +259,11 @@ WhatsApp remains an external provider channel. A local conversation simulator mu
 - Unknown or clinical message: defer to a person.
 - WhatsApp unavailable: use the simulator or approved fallback; preserve the same event trail.
 
-## 11. Submission claims and wording
+## 11. Public claims and wording
 
 ### Safe claims
 
-- “SUTRA integrates through a vendor-neutral adapter contract. OpenMRS Mini is our reference demonstration.”
+- “SUTRA integrates through a vendor-neutral adapter contract. OpenMRS Mini is our reference integration.”
 - “The hospital EHR remains the authority for patient identity and clinical records.”
 - “The scheduler remains the authority for confirmed bookings.”
 - “SUTRA transcribes and extracts drafts; people confirm clinical content.”
@@ -269,16 +284,16 @@ WhatsApp remains an external provider channel. A local conversation simulator mu
 - “OpenELIS and Odoo are part of OpenMRS Mini.”
 - “The 90-day pilot has already improved outcomes.”
 
-## 12. Qualification checklist
+## 12. Release readiness checklist
 
-- A practising doctor is registered as the required clinical partner.
+- A practising doctor is named as the clinical lead.
 - The doctor-facing use case is Patient Follow-up and Continuity of Care.
 - All data, reports, phone numbers and appointments are synthetic or fully anonymised.
-- The repository declares all pre-existing components and the SUTRA code built during the sprint.
+- The repository declares every pre-existing open-source component separately from SUTRA's own code.
 - At least one real read and one real appointment write occur through the reference adapter.
 - Speech and OCR visibly require human confirmation.
-- The demo contains no diagnosis, report interpretation, treatment recommendation, clinical risk score or autonomous advice.
+- The reference implementation contains no diagnosis, report interpretation, treatment recommendation, clinical risk score or autonomous advice.
 - The emergency path is described as signposting, not triage.
 - The primary KPI has a numerator, denominator, evidence source and baseline method.
-- Mock, demo, pilot and roadmap functionality are labelled honestly.
+- Mock, reference, pilot and roadmap functionality are labelled honestly.
 - The public repository includes license, reproducible setup, seed data, reset instructions and failure-mode instructions.

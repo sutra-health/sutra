@@ -187,7 +187,7 @@ The production protobuf definitions are versioned artifacts. The sample above es
 2. Store the original file or immutable source reference before extraction.
 3. Scan uploaded files for malware and enforce type and size limits.
 4. Limit OCR extraction to fields approved for the document type.
-5. For the hackathon flow, the allowed report fields are patient identifier/name, document type and report date.
+5. In the reference implementation, the allowed report fields are patient identifier/name, document type and report date.
 6. Show extracted text, confidence, source crop, model/version and correction history.
 7. Records staff may confirm identity, document type and date but must not interpret clinical values.
 8. The doctor must be able to open the original report.
@@ -338,7 +338,7 @@ Every model response must record the model, version, confidence, input source, o
 - Require explicit service-message consent and honor opt-out.
 - Use shared-phone-safe language.
 - Run a site privacy and security assessment before real patient data.
-- Use only synthetic or fully anonymised data during the hackathon.
+- Use only synthetic or fully anonymised data in the reference implementation and the demonstration environment.
 
 ## 12. Deployment requirements
 
@@ -369,7 +369,7 @@ Supporting measures include unresolved steps seven days after due date, same-day
 
 ## 14. MVP acceptance criteria
 
-The hackathon MVP is complete only when a synthetic Meena flow demonstrates all of the following:
+The reference implementation is complete only when a synthetic Meena flow demonstrates all of the following:
 
 1. Find the patient through the OpenMRS Mini reference adapter without copying the clinical record into a second master patient table.
 2. Show source-linked encounters or documents.
