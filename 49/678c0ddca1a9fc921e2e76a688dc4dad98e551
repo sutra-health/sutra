@@ -1,0 +1,38 @@
+internal/adapters/jev/jev_test.go
+  s_8b2ad512e4a2e9::t_b0aa9947cff2b6 1-5,7,9-14,23,26-42,45-55,58,61,63-79
+  s_8b2ad512e4a2e9::t_7ae39e15025865 6,8,15-22,24-25,43-44,56-57,59-60,62
+internal/core/routing.go
+  s_8b2ad512e4a2e9::t_62676ebdf03877 52
+apps/web/src/api.ts
+  s_8b2ad512e4a2e9::t_62676ebdf03877 37
+docs/WORKFLOW_PROOF.md
+  s_8b2ad512e4a2e9::t_a48f5abc066bd7 18,25-27,29,35-37,39,41
+  s_8b2ad512e4a2e9::t_74183fbb787439 1-17,19-24,28,30-34,38,40,42-76
+internal/adapters/jev/jev.go
+  s_8b2ad512e4a2e9::t_62676ebdf03877 29-41
+README.md
+  s_8b2ad512e4a2e9::t_74183fbb787439 183
+apps/web/App.tsx
+  s_8b2ad512e4a2e9::t_556c2f07455b40 648,751
+  s_8b2ad512e4a2e9::t_27ac711b94022b 674
+internal/core/model.go
+  s_8b2ad512e4a2e9::t_62676ebdf03877 110
+internal/core/routing_test.go
+  s_8b2ad512e4a2e9::t_b0aa9947cff2b6 8-17,37-58
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "49678c0ddca1a9fc921e2e76a688dc4dad98e551",
+  "prompts": {},
+  "sessions": {
+    "s_8b2ad512e4a2e9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f0e4-4387-7923-a82f-3a1ff8cf556c",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Charitra Arora <charitraarora@gmail.com>"
+    }
+  }
+}
