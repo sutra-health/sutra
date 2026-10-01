@@ -1,0 +1,133 @@
+.gitignore
+  s_8b2ad512e4a2e9::t_09596b83d42a57 1-10
+.env.example
+  s_8b2ad512e4a2e9::t_e123ce24fe25ce 1-62
+apps/web/.env.example
+  s_8b2ad512e4a2e9::t_38be73e43bf538 1-15
+apps/web/App.tsx
+  s_a61a71efd8443f::t_77ff29a8d9bbdc 1-848
+apps/web/app.config.js
+  s_8b2ad512e4a2e9::t_52eedc15d41ab4 1-7
+apps/web/package.json
+  s_8b2ad512e4a2e9::t_0e8f6e72ebafa3 1-37
+apps/web/src/auth.ts
+  s_8b2ad512e4a2e9::t_b116b6b5253f0c 1-132
+cmd/api/main.go
+  s_8b2ad512e4a2e9::t_cfc58cc7c3ce6b 1-96
+cmd/seed-reference/main.go
+  s_8b2ad512e4a2e9::t_ef3d8bdfe9327b 1-30
+dev/Caddyfile.doctor-reference
+  s_b2f99a3c130f74::t_8e805ede9d9c8e 1-17
+docker-compose.yml
+  s_8b2ad512e4a2e9::t_a9269911b2dfa6 1-84
+docs/DEPLOYMENT.md
+  s_8b2ad512e4a2e9::t_2fcb65bce04722 1-349
+docs/HACKATHON_SCOPE.md
+  s_b2f99a3c130f74::t_6bb7b6cfcc06d5 1-284
+docs/PRODUCT_REQUIREMENTS.md
+  s_b2f99a3c130f74::t_ec5c1cde061f5c 1-385
+docs/SLIDE_CAPABILITY_MAP.md
+  s_8b2ad512e4a2e9::t_1896271c2aecbb 1-65
+examples/README.md
+  s_8b2ad512e4a2e9::t_e9e45b7b43570f 1-15
+examples/abdm-sandbox/adapter.manifest.yaml
+  s_8b2ad512e4a2e9::t_3bae067796d1b6 1-16
+examples/abdm-sandbox/link-verified-abha.request.json.tmpl
+  s_8b2ad512e4a2e9::t_cd05e175bff4bb 1-15
+examples/abdm-sandbox/probe.request.json.tmpl
+  s_8b2ad512e4a2e9::t_d720fa1b82ddca 1-8
+examples/abdm-sandbox/smoke-test.grpcurl.md
+  s_8b2ad512e4a2e9::t_9cfb0984e3151c 1-39
+examples/chatwoot-whatsapp/README.md
+  s_8b2ad512e4a2e9::t_d35a667c1de725 1-30
+examples/chatwoot-whatsapp/adapter.manifest.yaml
+  s_8b2ad512e4a2e9::t_5d42a59d6dd535 1-14
+examples/chatwoot-whatsapp/smoke-test.http
+  s_8b2ad512e4a2e9::t_279a186eb7aa65 1-63
+examples/generic-fhir/adapter.manifest.yaml
+  s_8b2ad512e4a2e9::t_3245305d90b470 1-14
+examples/generic-fhir/smoke-test.http
+  s_8b2ad512e4a2e9::t_311bc853bba5c4 1-44
+examples/openmrs-mini/LIVE_VERIFICATION.md
+  s_8b2ad512e4a2e9::t_ab312b1dda8360 1-43
+examples/openmrs-mini/adapter.manifest.yaml
+  s_8b2ad512e4a2e9::t_238dc5f32d9695 1-15
+examples/remote-grpc-adapter/adapter.manifest.yaml
+  s_8b2ad512e4a2e9::t_d3c427aa542749 1-14
+examples/remote-grpc-adapter/find-patient-partial.request.json.tmpl
+  s_8b2ad512e4a2e9::t_cc0b14fa8ce869 1-9
+examples/remote-grpc-adapter/find-patient.request.json.tmpl
+  s_8b2ad512e4a2e9::t_d0e45124dfd1b6 1-9
+examples/remote-grpc-adapter/list-encounters.request.json.tmpl
+  s_8b2ad512e4a2e9::t_86866a00520d5d 1-15
+examples/remote-grpc-adapter/probe.request.json.tmpl
+  s_8b2ad512e4a2e9::t_07b44b2239c5e2 1-8
+examples/remote-grpc-adapter/smoke-test.grpcurl.md
+  s_8b2ad512e4a2e9::t_868d44e0bb18f0 1-84
+gen/go/sutra/adapter/v1/adapter.pb.go
+  s_8b2ad512e4a2e9::t_fd743e179ab1c7 1-1805
+gen/go/sutra/adapter/v1/adapter_grpc.pb.go
+  s_8b2ad512e4a2e9::t_2dd662694df557 1-745
+go.mod
+  s_8b2ad512e4a2e9::t_66c3d94273a5c0 1-27
+go.sum
+  s_8b2ad512e4a2e9::t_72d48fab4ea242 1-70
+internal/adapters/chatwoot/chatwoot.go
+  s_8b2ad512e4a2e9::t_28c3d3dcb01f93 1-99
+internal/auth/auth.go
+  s_8b2ad512e4a2e9::t_d57e9d245ffb4b 1-123
+internal/config/config.go
+  s_8b2ad512e4a2e9::t_bea508ec819e76 1-70
+internal/core/model.go
+  s_8b2ad512e4a2e9::t_08f977b49135f3 1-281
+internal/core/routing.go
+  s_8b2ad512e4a2e9::t_d996094522cb4e 1-53
+internal/core/routing_test.go
+  s_8b2ad512e4a2e9::t_c43d17d2a34973 1-26
+internal/inference/client.go
+  s_8b2ad512e4a2e9::t_17674e52c2c6bb 1-74
+internal/store/migrations/002_patient_lifecycle.sql
+  s_8b2ad512e4a2e9::t_bc169c291077cb 1-58
+package-lock.json
+  s_8b2ad512e4a2e9::t_510ae2a4d308fa 1-11218
+services/ocr/Dockerfile
+  s_8b2ad512e4a2e9::t_a244702ca826c8 1-17
+services/ocr/README.md
+  s_8b2ad512e4a2e9::t_373316160f5f92 1-9
+services/ocr/app.py
+  s_8b2ad512e4a2e9::t_565c4480bce628 1-106
+services/ocr/requirements.txt
+  s_8b2ad512e4a2e9::t_08d9fb51826b09 1-5
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "a3082dee4f6a371d296f2bc71e2ef37717b76d78",
+  "prompts": {},
+  "sessions": {
+    "s_8b2ad512e4a2e9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f0e4-4387-7923-a82f-3a1ff8cf556c",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Charitra Arora <charitraarora@gmail.com>"
+    },
+    "s_a61a71efd8443f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0344922a-6da9-4390-96f3-9aa79998d55b",
+        "model": "unknown"
+      },
+      "human_author": "Charitra Arora <charitraarora@gmail.com>"
+    },
+    "s_b2f99a3c130f74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5053a153-71fa-4131-a82b-b98190e8207f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Charitra Arora <charitraarora@gmail.com>"
+    }
+  }
+}
