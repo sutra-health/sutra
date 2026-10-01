@@ -1,0 +1,37 @@
+README.md
+  s_b2f99a3c130f74::t_e8bece34bc5a23 1-3,5-7,9-15,17-23,25,27-57,61,63-87,89,91,93-106,113,119,128,134-135,138-149,152-154,158-166,168,170-205,207-209
+.github/ISSUE_TEMPLATE/bug_report.yml
+  s_b2f99a3c130f74::t_122e1bfd746e72 1-58
+.github/ISSUE_TEMPLATE/config.yml
+  s_b2f99a3c130f74::t_374176624ee369 1-8
+.github/ISSUE_TEMPLATE/feature_request.yml
+  s_b2f99a3c130f74::t_ac33a536f03a83 1-39
+.github/assets/banner.svg
+  s_b2f99a3c130f74::t_b5d5b4c737c63a 1-40
+.github/pull_request_template.md
+  s_b2f99a3c130f74::t_515c108273c7ce 1-20
+CODE_OF_CONDUCT.md
+  s_b2f99a3c130f74::t_7aacfa74a85eb7 1-85
+CONTRIBUTING.md
+  s_b2f99a3c130f74::t_7e70b873e3081b 1-52
+LICENSE
+  s_b2f99a3c130f74::t_f505bc041e0b62 1-661
+SECURITY.md
+  s_b2f99a3c130f74::t_1188de031fa6cb 1-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d35a11d3d003056e72dd14904efbe1673c02f01a",
+  "prompts": {},
+  "sessions": {
+    "s_b2f99a3c130f74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5053a153-71fa-4131-a82b-b98190e8207f",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "charitra-prem <charitra@premai.io>"
+    }
+  }
+}
