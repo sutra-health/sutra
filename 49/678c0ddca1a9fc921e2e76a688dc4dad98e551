@@ -12,6 +12,7 @@ internal/adapters/jev/jev.go
   s_8b2ad512e4a2e9::t_62676ebdf03877 29-41
 README.md
   s_8b2ad512e4a2e9::t_74183fbb787439 183
+  s_b2f99a3c130f74::t_35767290ec8ba5 176
 apps/web/App.tsx
   s_8b2ad512e4a2e9::t_556c2f07455b40 648,751
   s_8b2ad512e4a2e9::t_27ac711b94022b 674
@@ -31,6 +32,14 @@ internal/core/routing_test.go
         "tool": "codex",
         "id": "01a0f0e4-4387-7923-a82f-3a1ff8cf556c",
         "model": "gpt-5.6-sol"
+      },
+      "human_author": "Charitra Arora <charitraarora@gmail.com>"
+    },
+    "s_b2f99a3c130f74": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5053a153-71fa-4131-a82b-b98190e8207f",
+        "model": "claude-opus-5-5"
       },
       "human_author": "Charitra Arora <charitraarora@gmail.com>"
     }
