@@ -173,6 +173,7 @@ See [the onboarding runbook](./docs/ONBOARDING_RUNBOOK.md) for the evidence requ
 | [Product requirements](./docs/PRODUCT_REQUIREMENTS.md) | What SUTRA must and must not do, and the primary measure |
 | [Delivery scope](./docs/DELIVERY_SCOPE.md) | What is in the reference implementation, the supervised pilot and the roadmap |
 | [Capability map](./docs/CAPABILITY_MAP.md) | Each capability with its surface, boundary and delivery stage |
+| [Workflow evidence](./docs/WORKFLOW_PROOF.md) | Each target flow beside the running app, and which external connections still need live credentials |
 | [Meena reference lifecycle](./docs/MEENA_REFERENCE_LIFECYCLE.md) | The reference patient journey, end to end |
 | [Deployment](./docs/DEPLOYMENT.md) | Deployment profiles, from developer machine to production |
 | [Adapter guide](./docs/ADAPTER_GUIDE.md) | How to connect an EHR, scheduler or other hospital system |

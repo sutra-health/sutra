@@ -49,5 +49,5 @@ func (r Router) Decide(ctx context.Context, call Context, text string) (RouteDec
 	if !valid {
 		destination = "human_review_general"
 	}
-	return RouteDecision{Topic: classified.Label, Destination: destination, Confidence: classified.Confidence, DecisionMethod: "typed_topic_suggestion", DeferredToHuman: deferred}, nil
+	return RouteDecision{Topic: classified.Label, Destination: destination, Confidence: classified.Confidence, DecisionMethod: "typed_topic_suggestion", ClassifierModel: classified.Model, DeferredToHuman: deferred}, nil
 }

@@ -107,6 +107,7 @@ type RouteDecision struct {
 	Destination     string  `json:"destination"`
 	Confidence      float64 `json:"confidence"`
 	DecisionMethod  string  `json:"decisionMethod"`
+	ClassifierModel string  `json:"classifierModel,omitempty"`
 	DeferredToHuman bool    `json:"deferredToHuman"`
 	EmergencyNotice string  `json:"emergencyNotice,omitempty"`
 }

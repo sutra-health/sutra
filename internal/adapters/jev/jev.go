@@ -26,7 +26,19 @@ func (a *Adapter) Manifest() core.Manifest {
 	return core.Manifest{AdapterID: "ai.typesafe.jev", DisplayName: "TypeSafe Jev bounded classifier", Version: "0.1.0", Authority: "topic suggestion only; never clinical severity", Capabilities: []core.Capability{core.TypedClassificationCapability}, Metadata: map[string]any{"externalProcessor": true, "dataMode": a.dataMode}}
 }
 func (a *Adapter) Probe(ctx context.Context, call core.Context) (core.ProbeResult, error) {
-	return core.ProbeResult{Reachable: a.apiKey != "", Manifest: a.Manifest(), Checks: []string{"configuration present"}, Warnings: []string{"Use synthetic/de-identified text until hospital privacy approval"}}, nil
+	result := core.ProbeResult{Manifest: a.Manifest(), Checks: []string{}, Warnings: []string{"Use synthetic/de-identified text until hospital privacy approval"}}
+	if a.apiKey == "" {
+		result.Warnings = append(result.Warnings, "JEV_API_KEY is not configured")
+		return result, nil
+	}
+	classification, err := a.Classify(ctx, call, "I need to reschedule my appointment", []string{"plan_question", "scheduling", "records", "administrative", "clinical_or_unknown"})
+	if err != nil {
+		result.Warnings = append(result.Warnings, "Synthetic typed-classification probe failed: "+err.Error())
+		return result, nil
+	}
+	result.Reachable = true
+	result.Checks = append(result.Checks, "synthetic typed-classification request accepted", "response model: "+classification.Model)
+	return result, nil
 }
 
 func (a *Adapter) Classify(ctx context.Context, call core.Context, text string, labels []string) (core.TypedClassification, error) {
