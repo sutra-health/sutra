@@ -1,0 +1,15 @@
+{
+  "name": "sutra",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,magenta \"go run ./cmd/api\" \"npm run dev -w @sutra/web\"",
+    "build": "go build ./... && npm run build -w @sutra/web",
+    "test": "go test ./... && npm run test -w @sutra/web",
+    "typecheck": "go vet ./... && npm run typecheck -w @sutra/web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

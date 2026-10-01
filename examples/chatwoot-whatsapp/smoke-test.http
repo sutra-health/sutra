@@ -1,0 +1,63 @@
+# Use synthetic contacts and a Meta test number or isolated approved project number.
+
+@chatwootBaseUrl = {{CHATWOOT_BASE_URL}}
+@chatwootAccountId = {{CHATWOOT_ACCOUNT_ID}}
+@chatwootApiToken = {{CHATWOOT_API_TOKEN}}
+@syntheticConversationId = {{CHATWOOT_SYNTHETIC_CONVERSATION_ID}}
+@sutraBaseUrl = {{SUTRA_BASE_URL}}
+@sutraTenantId = {{SUTRA_TENANT_ID}}
+@sutraAccessToken = {{SUTRA_ACCESS_TOKEN}}
+@chatwootWebhookSignature = {{CHATWOOT_TEST_WEBHOOK_SIGNATURE}}
+
+### Chatwoot account API health used by the Go adapter Probe
+GET {{chatwootBaseUrl}}/api/v1/accounts/{{chatwootAccountId}}/agents
+api_access_token: {{chatwootApiToken}}
+Accept: application/json
+
+### Runtime capability discovery through SUTRA
+GET {{sutraBaseUrl}}/api/v1/integrations
+Authorization: Bearer {{sutraAccessToken}}
+Accept: application/json
+
+### Signed Chatwoot event into the actual Go edge route.
+# CHATWOOT_TEST_WEBHOOK_SIGNATURE is a hex HMAC-SHA256 of the exact body below,
+# created by the configured signer with CHATWOOT_WEBHOOK_SECRET.
+POST {{sutraBaseUrl}}/webhooks/chatwoot/{{sutraTenantId}}
+X-Chatwoot-Signature: sha256={{chatwootWebhookSignature}}
+Content-Type: application/json
+
+{
+  "event": "message_created",
+  "id": "{{CHATWOOT_SYNTHETIC_MESSAGE_ID}}",
+  "message_type": "incoming",
+  "conversation": {"id": "{{syntheticConversationId}}"}
+}
+
+### Negative webhook test: must return 401 and create no workflow event.
+POST {{sutraBaseUrl}}/webhooks/chatwoot/{{sutraTenantId}}
+X-Chatwoot-Signature: sha256={{CHATWOOT_INTENTIONALLY_INVALID_SIGNATURE}}
+Content-Type: application/json
+
+{
+  "event": "message_created",
+  "id": "{{CHATWOOT_SYNTHETIC_MESSAGE_ID}}",
+  "message_type": "incoming",
+  "conversation": {"id": "{{syntheticConversationId}}"}
+}
+
+### MUTATING TEST: send an approved utility template through Chatwoot.
+# Run only in the test inbox. The reference adapter's Conversation.SendTemplate
+# maps to this endpoint and never sends directly to Meta in this ownership profile.
+POST {{chatwootBaseUrl}}/api/v1/accounts/{{chatwootAccountId}}/conversations/{{syntheticConversationId}}/messages
+api_access_token: {{chatwootApiToken}}
+Content-Type: application/json
+
+{
+  "message_type": "outgoing",
+  "template_params": {
+    "name": "{{WHATSAPP_APPROVED_TEST_TEMPLATE}}",
+    "category": "UTILITY",
+    "language": "{{WHATSAPP_TEST_LANGUAGE}}",
+    "processed_params": {}
+  }
+}

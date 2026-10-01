@@ -1,0 +1,47 @@
+# Deployment mapping example. The current Go process reads the referenced
+# OPENMRS_* environment variables through internal/config; it does not parse
+# this YAML directly.
+apiVersion: sutra.health/v1alpha1
+kind: AdapterConfiguration
+metadata:
+  name: openmrs-mini-reference
+spec:
+  adapterId: org.openmrs.reference
+  upstream:
+    baseUrl:
+      fromEnv: OPENMRS_BASE_URL
+    authentication:
+      type: basic
+      username:
+        fromEnv: OPENMRS_USERNAME
+      password:
+        fromEnv: OPENMRS_PASSWORD
+    tls:
+      verifyServerCertificate: true
+      caFile:
+        fromEnv: OPENMRS_CA_FILE
+  patientLookup:
+    endpoint: /ws/rest/v1/patient
+    queryParameter: q
+    exactIdentifierValueRequired: true
+    rejectPartialMatches: true
+    rejectPhoneAsIdentity: true
+  encounters:
+    mode: fhir-r4
+    capabilityStatementPath: /ws/fhir2/R4/metadata
+    searchPath: /ws/fhir2/R4/Encounter
+  appointments:
+    requiredModule: bahmni-appointments-compatible
+    createPath: /ws/rest/v1/appointments
+    sourceBookedStatuses:
+      - Scheduled
+    requireSourceIdentifier: true
+    writeEnabled:
+      fromEnv: SUTRA_OPENMRS_APPOINTMENT_WRITE_ENABLED
+  discovery:
+    sessionPath: /ws/rest/v1/session
+    requireAllManifestCapabilities: true
+  limits:
+    requestTimeout:
+      fromEnv: OUTBOUND_TIMEOUT_SECONDS
+    maxResponseBytes: 8388608

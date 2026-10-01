@@ -1,0 +1,42 @@
+# Deployment contract for a future adapter host. The current API process does
+# not parse this YAML.
+apiVersion: sutra.health/v1alpha1
+kind: RemoteAdapterConfiguration
+metadata:
+  name: hospital-patient-directory
+spec:
+  grpc:
+    target:
+      fromEnv: REMOTE_ADAPTER_GRPC_TARGET
+    serverName:
+      fromEnv: REMOTE_ADAPTER_TLS_SERVER_NAME
+    mtls:
+      caFile:
+        fromEnv: REMOTE_ADAPTER_CA_FILE
+      clientCertificateFile:
+        fromEnv: REMOTE_ADAPTER_CLIENT_CERT_FILE
+      clientKeyFile:
+        fromEnv: REMOTE_ADAPTER_CLIENT_KEY_FILE
+    maxReceiveBytes: 8388608
+    deadlineSeconds:
+      fromEnv: REMOTE_ADAPTER_DEADLINE_SECONDS
+  expectedManifest:
+    adapterId: example.hospital.patient-directory
+    versionConstraint: "0.1.x"
+    requiredCapabilities:
+      - CAPABILITY_PATIENT_READ
+      - CAPABILITY_ENCOUNTER_READ
+    forbiddenCapabilities:
+      - CAPABILITY_CLINICAL_WRITE
+      - CAPABILITY_PRESCRIPTION_WRITE
+      - CAPABILITY_APPOINTMENT_WRITE
+  identityPolicy:
+    exactIdentifierRequired: true
+    rejectFuzzyMatches: true
+    rejectPhoneAsIdentity: true
+  contextPolicy:
+    tenantComesFromAuthenticatedSutraServer: true
+    rejectMissingTenant: true
+    rejectBrowserSuppliedTenant: true
+  telemetry:
+    includePayloads: false

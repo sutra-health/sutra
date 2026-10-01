@@ -1,0 +1,15 @@
+# Mirrors sutra.adapter.v1.AdapterManifest returned by the checked-in Go adapter.
+adapter_id: org.openmrs.reference
+display_name: OpenMRS REST/FHIR reference adapter
+version: 0.1.0
+capabilities:
+  - CAPABILITY_PATIENT_READ
+  - CAPABILITY_ENCOUNTER_READ
+  - CAPABILITY_APPOINTMENT_READ
+  - CAPABILITY_APPOINTMENT_WRITE
+authority: patient identity, encounters and installed appointment module
+metadata:
+  vendorSpecific: true
+  transport: REST/FHIR R4
+  goModule: github.com/sutra-care/sutra
+  protoPackage: sutra.adapter.v1

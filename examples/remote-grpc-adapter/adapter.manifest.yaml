@@ -1,0 +1,14 @@
+# Expected sutra.adapter.v1.AdapterManifest. Probe output is authoritative.
+adapter_id: example.hospital.patient-directory
+display_name: Example hospital patient and encounter adapter
+version: 0.1.0
+capabilities:
+  - CAPABILITY_PATIENT_READ
+  - CAPABILITY_ENCOUNTER_READ
+authority: patient identity and encounter references in the hospital source system
+metadata:
+  transport: mTLS gRPC
+  deployment: remote
+  exactIdentifierRequired: true
+  goModule: github.com/sutra-care/sutra
+  protoPackage: sutra.adapter.v1

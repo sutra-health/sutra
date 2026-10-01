@@ -1,0 +1,53 @@
+# Deployment mapping example. The current Go process reads the referenced
+# CHATWOOT_* environment variables through internal/config; it does not parse
+# this YAML directly.
+apiVersion: sutra.health/v1alpha1
+kind: AdapterConfiguration
+metadata:
+  name: chatwoot-whatsapp
+spec:
+  adapterId: io.chatwoot.whatsapp
+  chatwoot:
+    baseUrl:
+      fromEnv: CHATWOOT_BASE_URL
+    accountId:
+      fromEnv: CHATWOOT_ACCOUNT_ID
+    inboxId:
+      fromEnv: CHATWOOT_INBOX_ID
+    apiToken:
+      fromEnv: CHATWOOT_API_TOKEN
+    tls:
+      verifyServerCertificate: true
+      caFile:
+        fromEnv: CHATWOOT_CA_FILE
+  ownership:
+    metaWebhookOwner: chatwoot
+    rawConversationOwner: chatwoot
+    humanAssignmentOwner: chatwoot
+    sutraStoresRawConversation: false
+    directMetaAdapterEnabled: false
+  sutraWebhook:
+    urlTemplate: "${SUTRA_PUBLIC_BASE_URL}/webhooks/chatwoot/${SUTRA_TENANT_ID}"
+    rawBodyRequired: true
+    signatureHeader: X-Chatwoot-Signature
+    hmacAlgorithm: HMAC-SHA256
+    secret:
+      fromEnv: CHATWOOT_WEBHOOK_SECRET
+    signer:
+      fromEnv: CHATWOOT_WEBHOOK_SIGNER
+  routing:
+    schedulingTeamId:
+      fromEnv: CHATWOOT_SCHEDULING_TEAM_ID
+    recordsTeamId:
+      fromEnv: CHATWOOT_RECORDS_TEAM_ID
+    nurseTeamId:
+      fromEnv: CHATWOOT_NURSE_TEAM_ID
+    doctorTeamId:
+      fromEnv: CHATWOOT_DOCTOR_TEAM_ID
+  messaging:
+    approvedTemplatesOnlyOutsideSession: true
+    defaultLanguage:
+      fromEnv: WHATSAPP_DEFAULT_LANGUAGE
+  limits:
+    requestTimeout:
+      fromEnv: OUTBOUND_TIMEOUT_SECONDS

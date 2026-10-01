@@ -1,0 +1,14 @@
+# Serialisation of sutra.adapter.v1.AdapterManifest for the example adapter.
+adapter_id: org.hl7.fhir.r4.readonly.example
+display_name: Generic FHIR R4 patient and encounter adapter
+version: 0.1.0
+capabilities:
+  - CAPABILITY_PATIENT_READ
+  - CAPABILITY_ENCOUNTER_READ
+authority: source patient identity and encounter references exposed by the configured FHIR server
+metadata:
+  vendorSpecific: true
+  transport: FHIR R4 over HTTPS
+  mode: read-only
+  goModule: github.com/sutra-care/sutra
+  protoPackage: sutra.adapter.v1

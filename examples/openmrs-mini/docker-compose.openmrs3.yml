@@ -1,0 +1,78 @@
+name: sutra-openmrs
+
+# Official OpenMRS 3 Reference Application, pinned to the tested 3.7.1 release.
+# This stack is deliberately separate from SUTRA: integration happens only
+# through OpenMRS REST/FHIR APIs, never through the OpenMRS database.
+services:
+  gateway:
+    image: openmrs/openmrs-reference-application-3-gateway:3.7.1
+    restart: unless-stopped
+    depends_on:
+      frontend:
+        condition: service_healthy
+      backend:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:18081:80"
+
+  frontend:
+    image: openmrs/openmrs-reference-application-3-frontend:3.7.1
+    restart: unless-stopped
+    environment:
+      SPA_PATH: /openmrs/spa
+      API_URL: /openmrs
+      SPA_CONFIG_URLS: /openmrs/spa/config-core_demo.json
+      SPA_DEFAULT_LOCALE: en
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    depends_on:
+      backend:
+        condition: service_healthy
+
+  backend:
+    image: openmrs/openmrs-reference-application-3-backend:3.7.1
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      OMRS_CONFIG_MODULE_WEB_ADMIN: "false"
+      OMRS_CONFIG_AUTO_UPDATE_DATABASE: "true"
+      OMRS_CONFIG_CREATE_TABLES: "true"
+      OMRS_CONFIG_CONNECTION_SERVER: db
+      OMRS_CONFIG_CONNECTION_DATABASE: openmrs
+      OMRS_CONFIG_CONNECTION_USERNAME: openmrs
+      OMRS_CONFIG_CONNECTION_PASSWORD: openmrs-reference-only
+    healthcheck:
+      # A 302 to /initialsetup is not ready. Require an authenticated REST body.
+      test: ["CMD-SHELL", "curl -fsS -u admin:Admin123 http://localhost:8080/openmrs/ws/rest/v1/session | grep -q '\"authenticated\":true'"]
+      interval: 15s
+      timeout: 8s
+      retries: 60
+      start_period: 90s
+    volumes:
+      - openmrs-data:/openmrs/data
+
+  db:
+    image: mariadb:10.11.7
+    restart: unless-stopped
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci"
+    environment:
+      MYSQL_DATABASE: openmrs
+      MYSQL_USER: openmrs
+      MYSQL_PASSWORD: openmrs-reference-only
+      MYSQL_ROOT_PASSWORD: openmrs-reference-root-only
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -uopenmrs -popenmrs-reference-only --silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - openmrs-db-data:/var/lib/mysql
+
+volumes:
+  openmrs-data:
+  openmrs-db-data:

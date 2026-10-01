@@ -1,0 +1,17 @@
+:59603 {
+	encode zstd gzip
+
+	@api path /api/* /health
+	handle @api {
+		reverse_proxy 127.0.0.1:44100 {
+			header_up X-Sutra-Tenant 00000000-0000-4000-8000-000000000001
+			header_up X-Sutra-Role doctor
+		}
+	}
+
+	handle {
+		root * apps/web/dist
+		try_files {path} /index.html
+		file_server
+	}
+}

@@ -1,0 +1,154 @@
+syntax = "proto3";
+
+package sutra.adapter.v1;
+
+option go_package = "github.com/sutra-care/sutra/gen/go/sutra/adapter/v1;adapterv1";
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+message TenantContext {
+  string tenant_id = 1;
+  string unit_id = 2;
+  string actor_id = 3;
+  string correlation_id = 4;
+}
+
+enum Capability {
+  CAPABILITY_UNSPECIFIED = 0;
+  CAPABILITY_PATIENT_READ = 1;
+  CAPABILITY_ENCOUNTER_READ = 2;
+  CAPABILITY_CLINICAL_WRITE = 3;
+  CAPABILITY_PRESCRIPTION_WRITE = 4;
+  CAPABILITY_APPOINTMENT_READ = 5;
+  CAPABILITY_APPOINTMENT_WRITE = 6;
+  CAPABILITY_DOCUMENT_READ = 7;
+  CAPABILITY_DOCUMENT_WRITE = 8;
+  CAPABILITY_ABHA_IDENTITY = 9;
+  CAPABILITY_ABDM_HIP = 10;
+  CAPABILITY_ABDM_HIU = 11;
+  CAPABILITY_CONVERSATION = 12;
+  CAPABILITY_TYPED_CLASSIFICATION = 13;
+}
+
+message AdapterManifest {
+  string adapter_id = 1;
+  string display_name = 2;
+  string version = 3;
+  repeated Capability capabilities = 4;
+  string authority = 5;
+  google.protobuf.Struct metadata = 6;
+}
+
+message ProbeRequest { TenantContext context = 1; }
+message ProbeResponse {
+  bool reachable = 1;
+  AdapterManifest manifest = 2;
+  repeated string checks = 3;
+  repeated string warnings = 4;
+}
+
+message ExternalReference {
+  string system = 1;
+  string resource_type = 2;
+  string id = 3;
+  string display = 4;
+}
+
+message Patient {
+  ExternalReference reference = 1;
+  repeated string identifiers = 2;
+  string display_name = 3;
+  string gender = 4;
+  string birth_date = 5;
+  google.protobuf.Struct source = 6;
+}
+
+message FindPatientRequest { TenantContext context = 1; string identifier = 2; }
+message GetPatientRequest { TenantContext context = 1; ExternalReference patient = 2; }
+message PatientResponse { Patient patient = 1; }
+
+message ListEncountersRequest {
+  TenantContext context = 1;
+  ExternalReference patient = 2;
+  google.protobuf.Timestamp from = 3;
+}
+message Encounter {
+  ExternalReference reference = 1;
+  string type = 2;
+  google.protobuf.Timestamp occurred_at = 3;
+  repeated ExternalReference documents = 4;
+  google.protobuf.Struct source = 5;
+}
+message ListEncountersResponse { repeated Encounter encounters = 1; }
+
+message CreateAppointmentRequest {
+  TenantContext context = 1;
+  ExternalReference patient = 2;
+  ExternalReference service = 3;
+  ExternalReference location = 4;
+  google.protobuf.Timestamp starts_at = 5;
+  google.protobuf.Timestamp ends_at = 6;
+  string idempotency_key = 7;
+  string reason = 8;
+}
+message Appointment {
+  ExternalReference reference = 1;
+  string source_status = 2;
+  google.protobuf.Timestamp starts_at = 3;
+  google.protobuf.Timestamp ends_at = 4;
+  google.protobuf.Struct source = 5;
+}
+message AppointmentResponse { Appointment appointment = 1; }
+message GetAppointmentRequest {
+  TenantContext context = 1;
+  ExternalReference appointment = 2;
+}
+
+message SendTemplateRequest {
+  TenantContext context = 1;
+  string conversation_id = 2;
+  string template_name = 3;
+  string language = 4;
+  map<string, string> parameters = 5;
+}
+message SendMessageResponse { ExternalReference message = 1; string delivery_state = 2; }
+
+message ClassifyRequest {
+  TenantContext context = 1;
+  string deidentified_text = 2;
+  repeated string allowed_labels = 3;
+}
+message ClassifyResponse {
+  string label = 1;
+  double confidence = 2;
+  map<string, double> probabilities = 3;
+  string model = 4;
+  bool deferred_to_human = 5;
+}
+
+message AbhaLinkRequest {
+  TenantContext context = 1;
+  ExternalReference patient = 2;
+  string transaction_reference = 3;
+}
+message AbhaLinkResponse {
+  string masked_abha = 1;
+  bool verified = 2;
+  google.protobuf.Timestamp verified_at = 3;
+  ExternalReference source_reference = 4;
+}
+
+service AdapterRegistry { rpc Probe(ProbeRequest) returns (ProbeResponse); }
+service PatientDirectory {
+  rpc FindByIdentifier(FindPatientRequest) returns (PatientResponse);
+  rpc GetPatient(GetPatientRequest) returns (PatientResponse);
+  rpc ListEncounters(ListEncountersRequest) returns (ListEncountersResponse);
+}
+service Scheduler {
+  rpc CreateAppointment(CreateAppointmentRequest) returns (AppointmentResponse);
+  rpc GetAppointment(GetAppointmentRequest) returns (AppointmentResponse);
+}
+service Conversation { rpc SendTemplate(SendTemplateRequest) returns (SendMessageResponse); }
+service TypedInference { rpc Classify(ClassifyRequest) returns (ClassifyResponse); }
+service Identity { rpc LinkVerifiedAbha(AbhaLinkRequest) returns (AbhaLinkResponse); }

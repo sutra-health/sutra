@@ -1,0 +1,53 @@
+# Deployment contract for a conforming adapter. The current repository does
+# not load this YAML or ship the generic FHIR implementation.
+apiVersion: sutra.health/v1alpha1
+kind: AdapterConfiguration
+metadata:
+  name: generic-fhir-r4-readonly
+spec:
+  adapterId: org.hl7.fhir.r4.readonly.example
+  upstream:
+    baseUrl:
+      fromEnv: FHIR_BASE_URL
+    fhirVersion: R4
+    authentication:
+      type: oauth2-client-credentials
+      tokenUrl:
+        fromEnv: FHIR_TOKEN_URL
+      clientId:
+        fromEnv: FHIR_CLIENT_ID
+      clientSecret:
+        fromEnv: FHIR_CLIENT_SECRET
+      scopes:
+        fromEnv: FHIR_SCOPES
+    tls:
+      verifyServerCertificate: true
+      caFile:
+        fromEnv: FHIR_CA_FILE
+  capabilityDiscovery:
+    path: /metadata
+    requireResources:
+      - Patient
+      - Encounter
+    requireSearchParameters:
+      Patient:
+        - identifier
+      Encounter:
+        - patient
+  patientLookup:
+    identifierSystem:
+      fromEnv: FHIR_PATIENT_IDENTIFIER_SYSTEM
+    exactSystemAndValueRequired: true
+    rejectAmbiguousResults: true
+    rejectDemographicFallback: true
+    count: 2
+  encounterRead:
+    searchParameter: patient
+    pageSize: 50
+    maxPages: 10
+  writes:
+    enabled: false
+  limits:
+    requestTimeout:
+      fromEnv: OUTBOUND_TIMEOUT_SECONDS
+    maxResponseBytes: 8388608

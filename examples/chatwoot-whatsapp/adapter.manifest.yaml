@@ -1,0 +1,14 @@
+# Mirrors sutra.adapter.v1.AdapterManifest returned by internal/adapters/chatwoot.
+adapter_id: io.chatwoot.whatsapp
+display_name: Chatwoot WhatsApp Cloud gateway
+version: 0.1.0
+capabilities:
+  - CAPABILITY_CONVERSATION
+authority: conversation, agent assignment and delivery state
+metadata:
+  transport: Meta WhatsApp Cloud API
+  openSourceInbox: true
+  externalProcessor: Meta
+  webhookOwner: Chatwoot
+  goModule: github.com/sutra-care/sutra
+  protoPackage: sutra.adapter.v1

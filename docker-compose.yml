@@ -1,0 +1,84 @@
+name: sutra
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: sutra
+      POSTGRES_USER: sutra
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-sutra-dev-password}
+    volumes:
+      - sutra-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sutra -d sutra"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [sutra-internal]
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      DATABASE_URL: postgres://sutra:${POSTGRES_PASSWORD:-sutra-dev-password}@postgres:5432/sutra
+      OBJECT_STORAGE_PATH: /var/lib/sutra/evidence
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - sutra-evidence:/var/lib/sutra/evidence
+    networks: [sutra-internal, hospital-integration]
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    restart: unless-stopped
+    depends_on: [api]
+    ports:
+      - "8088:80"
+    networks: [sutra-internal]
+
+  ocr:
+    profiles: ["ai"]
+    build:
+      context: services/ocr
+    restart: unless-stopped
+    environment:
+      PADDLE_PDX_MODEL_SOURCE: huggingface
+      OCR_MODEL_ID: ${OCR_MODEL_ID:-PaddlePaddle/PaddleOCR-VL-1.6}
+      OCR_PIPELINE_VERSION: ${OCR_PIPELINE_VERSION:-v1.6}
+      OCR_DEVICE: ${OCR_DEVICE:-cpu}
+      HF_HOME: /models/huggingface
+    volumes:
+      - ocr-models:/models
+    networks: [sutra-internal]
+
+  stt:
+    profiles: ["ai"]
+    build:
+      context: services/stt
+    restart: unless-stopped
+    environment:
+      INDIC_CONFORMER_MODEL_PATH: /models/indicconformer.nemo
+    volumes:
+      - stt-models:/models:ro
+    networks: [sutra-internal]
+
+networks:
+  sutra-internal:
+    internal: true
+  hospital-integration:
+    driver: bridge
+
+volumes:
+  sutra-postgres:
+  sutra-evidence:
+  ocr-models:
+  stt-models:

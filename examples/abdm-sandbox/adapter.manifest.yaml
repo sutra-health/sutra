@@ -1,0 +1,16 @@
+# Serialisation of sutra.adapter.v1.AdapterManifest for the current callable surface.
+adapter_id: in.abdm.sandbox.identity-bridge
+display_name: ABDM sandbox verified-identity bridge
+version: 0.1.0
+capabilities:
+  - CAPABILITY_ABHA_IDENTITY
+authority: ABDM sandbox transaction and verified identity association managed by the local bridge
+metadata:
+  environment: sandbox
+  transport: mTLS gRPC to local bridge
+  callbackOwner: abdm-bridge
+  storesAadhaarOrOtpInSutra: false
+  hipCallable: false
+  hiuCallable: false
+  goModule: github.com/sutra-care/sutra
+  protoPackage: sutra.adapter.v1

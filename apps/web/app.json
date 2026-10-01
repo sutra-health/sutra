@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "SUTRA",
+    "slug": "sutra-care-follow-through",
+    "scheme": "sutra",
+    "version": "0.1.0",
+    "orientation": "default",
+    "userInterfaceStyle": "light",
+    "platforms": ["ios", "android", "web"],
+    "web": { "bundler": "metro", "output": "single", "name": "SUTRA care follow-through" },
+    "ios": { "supportsTablet": true },
+    "android": { "adaptiveIcon": { "backgroundColor": "#151c3b" } }
+  }
+}

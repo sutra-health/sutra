@@ -1,0 +1,44 @@
+# Use a synthetic patient and an isolated FHIR environment.
+
+@fhirBaseUrl = {{FHIR_BASE_URL}}
+@fhirAccessToken = {{FHIR_ACCESS_TOKEN}}
+@identifierSystem = {{FHIR_PATIENT_IDENTIFIER_SYSTEM}}
+@syntheticIdentifier = {{FHIR_SYNTHETIC_PATIENT_IDENTIFIER}}
+@syntheticPatientId = {{FHIR_SYNTHETIC_PATIENT_ID}}
+@sutraBaseUrl = {{SUTRA_BASE_URL}}
+@sutraAccessToken = {{SUTRA_ACCESS_TOKEN}}
+
+### FHIR capability discovery
+GET {{fhirBaseUrl}}/metadata
+Authorization: Bearer {{fhirAccessToken}}
+Accept: application/fhir+json
+
+### Exact system-and-value patient search
+GET {{fhirBaseUrl}}/Patient?identifier={{identifierSystem}}%7C{{syntheticIdentifier}}&_count=2
+Authorization: Bearer {{fhirAccessToken}}
+Accept: application/fhir+json
+
+### Patient read
+GET {{fhirBaseUrl}}/Patient/{{syntheticPatientId}}
+Authorization: Bearer {{fhirAccessToken}}
+Accept: application/fhir+json
+
+### Encounter search with bounded page size
+GET {{fhirBaseUrl}}/Encounter?patient={{syntheticPatientId}}&_count=50
+Authorization: Bearer {{fhirAccessToken}}
+Accept: application/fhir+json
+
+### Runtime adapter capability discovery through SUTRA
+GET {{sutraBaseUrl}}/api/v1/integrations
+Authorization: Bearer {{sutraAccessToken}}
+Accept: application/json
+
+### SUTRA exact-identifier behavior
+GET {{sutraBaseUrl}}/api/v1/patients/by-identifier/{{syntheticIdentifier}}/thread
+Authorization: Bearer {{sutraAccessToken}}
+Accept: application/json
+
+### Negative test: populate with a value known to be only a prefix; this must return 404.
+GET {{sutraBaseUrl}}/api/v1/patients/by-identifier/{{FHIR_SYNTHETIC_PARTIAL_IDENTIFIER}}/thread
+Authorization: Bearer {{sutraAccessToken}}
+Accept: application/json

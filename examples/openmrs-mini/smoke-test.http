@@ -1,0 +1,79 @@
+# Request template for a REST Client compatible runner.
+# All variables are environment placeholders. Use a synthetic OpenMRS tenant.
+
+@openmrsBaseUrl = {{OPENMRS_BASE_URL}}
+@openmrsUsername = {{OPENMRS_USERNAME}}
+@openmrsPassword = {{OPENMRS_PASSWORD}}
+@syntheticIdentifier = {{OPENMRS_SYNTHETIC_PATIENT_IDENTIFIER}}
+@syntheticPatientUuid = {{OPENMRS_SYNTHETIC_PATIENT_UUID}}
+@sutraBaseUrl = {{SUTRA_BASE_URL}}
+@sutraAccessToken = {{SUTRA_ACCESS_TOKEN}}
+@syntheticServiceUuid = {{OPENMRS_SYNTHETIC_SERVICE_UUID}}
+@syntheticLocationUuid = {{OPENMRS_SYNTHETIC_LOCATION_UUID}}
+@idempotencyKey = {{SUTRA_TEST_IDEMPOTENCY_KEY}}
+@appointmentUuid = {{OPENMRS_SYNTHETIC_APPOINTMENT_UUID}}
+
+### Upstream authenticated health
+GET {{openmrsBaseUrl}}/ws/rest/v1/session
+Authorization: Basic {{openmrsUsername}}:{{openmrsPassword}}
+Accept: application/json
+
+### Upstream capability discovery
+GET {{openmrsBaseUrl}}/ws/fhir2/R4/metadata
+Authorization: Basic {{openmrsUsername}}:{{openmrsPassword}}
+Accept: application/fhir+json
+
+### Upstream candidate search. The adapter must still inspect returned identifiers for exact equality.
+GET {{openmrsBaseUrl}}/ws/rest/v1/patient?q={{syntheticIdentifier}}&v=full
+Authorization: Basic {{openmrsUsername}}:{{openmrsPassword}}
+Accept: application/json
+
+### SUTRA capability discovery. The response contains the adapter ProbeResult and manifest.
+GET {{sutraBaseUrl}}/api/v1/integrations
+Authorization: Bearer {{sutraAccessToken}}
+Accept: application/json
+
+### Exact identifier through SUTRA. A partial identifier must return 404, never a candidate patient.
+GET {{sutraBaseUrl}}/api/v1/patients/by-identifier/{{syntheticIdentifier}}/thread
+Authorization: Bearer {{sutraAccessToken}}
+Accept: application/json
+
+### Persist the minimal SUTRA crosswalk for the exact source patient.
+POST {{sutraBaseUrl}}/api/v1/patient-links/resolve
+Authorization: Bearer {{sutraAccessToken}}
+Content-Type: application/json
+
+{
+  "identifier": "{{syntheticIdentifier}}"
+}
+
+### Encounter read through the upstream used by the current Go adapter
+GET {{openmrsBaseUrl}}/ws/fhir2/R4/Encounter?patient={{syntheticPatientUuid}}
+Authorization: Basic {{openmrsUsername}}:{{openmrsPassword}}
+Accept: application/fhir+json
+
+### MUTATING TEST: run only against the isolated seeded scheduler after site approval.
+# The request matches internal/core.AppointmentRequest as accepted by the SUTRA edge API.
+POST {{sutraBaseUrl}}/api/v1/appointments
+Authorization: Bearer {{sutraAccessToken}}
+Content-Type: application/json
+
+{
+  "patient": {"system":"openmrs","resourceType":"Patient","id":"{{syntheticPatientUuid}}"},
+  "service": {"system":"openmrs-appointments","resourceType":"AppointmentService","id":"{{syntheticServiceUuid}}"},
+  "location": {"system":"openmrs","resourceType":"Location","id":"{{syntheticLocationUuid}}"},
+  "startsAt": "{{SUTRA_TEST_APPOINTMENT_START_RFC3339}}",
+  "endsAt": "{{SUTRA_TEST_APPOINTMENT_END_RFC3339}}",
+  "idempotencyKey": "{{idempotencyKey}}",
+  "reason": "synthetic integration smoke test"
+}
+
+### Read the returned appointment UUID back through the configured scheduler adapter.
+GET {{sutraBaseUrl}}/api/v1/appointments/{{appointmentUuid}}
+Authorization: Bearer {{sutraAccessToken}}
+Accept: application/json
+
+### Verify the same source booking directly in OpenMRS.
+GET {{openmrsBaseUrl}}/ws/rest/v1/appointments/{{appointmentUuid}}
+Authorization: Basic {{openmrsUsername}}:{{openmrsPassword}}
+Accept: application/json

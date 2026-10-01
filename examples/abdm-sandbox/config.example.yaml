@@ -1,0 +1,52 @@
+# Deployment contract for a separate bridge and adapter. The current SUTRA
+# process reads ABDM_BRIDGE_URL only and does not parse this YAML.
+apiVersion: sutra.health/v1alpha1
+kind: AdapterConfiguration
+metadata:
+  name: abdm-sandbox-identity-bridge
+spec:
+  adapterId: in.abdm.sandbox.identity-bridge
+  environment: sandbox
+  sutraToBridge:
+    grpcTarget:
+      fromEnv: ABDM_BRIDGE_GRPC_TARGET
+    serverName:
+      fromEnv: ABDM_BRIDGE_TLS_SERVER_NAME
+    mtls:
+      caFile:
+        fromEnv: ABDM_BRIDGE_CA_FILE
+      clientCertificateFile:
+        fromEnv: ABDM_BRIDGE_CLIENT_CERT_FILE
+      clientKeyFile:
+        fromEnv: ABDM_BRIDGE_CLIENT_KEY_FILE
+  bridgeOwnedConfiguration:
+    gatewayBaseUrl:
+      fromEnv: ABDM_SANDBOX_BASE_URL
+    registeredCallbackBaseUrl:
+      fromEnv: ABDM_SANDBOX_CALLBACK_BASE_URL
+    clientId:
+      fromEnv: ABDM_SANDBOX_CLIENT_ID
+    clientSecret:
+      fromEnv: ABDM_SANDBOX_CLIENT_SECRET
+    hipId:
+      fromEnv: ABDM_SANDBOX_HIP_ID
+    hfrFacilityId:
+      fromEnv: ABDM_SANDBOX_HFR_FACILITY_ID
+    exchangePrivateKeyFile:
+      fromEnv: ABDM_SANDBOX_EXCHANGE_PRIVATE_KEY_FILE
+  ownership:
+    gatewayCredentialOwner: abdm-bridge
+    callbackOwner: abdm-bridge
+    consentStateOwner: abdm-bridge
+    exchangeKeyOwner: abdm-bridge
+    sutraReceivesOpaqueTransactionReferencesOnly: true
+  capabilities:
+    abhaIdentity: true
+    hip: false
+    hiu: false
+  dataPolicy:
+    syntheticSandboxPatientsOnly: true
+    storeAadhaarInSutra: false
+    storeOtpInSutra: false
+    storeGatewaySecretInSutra: false
+    storeExchangePrivateKeyInSutra: false
