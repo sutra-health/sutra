@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380" role="img" aria-label="SUTRA: one patient, one record, every step">
+<rect width="1200" height="380" rx="18" fill="#FBF8F3"/>
+<svg x="400" y="36" width="120" height="80" viewBox="0 0 240 160">
+<g fill="none" stroke-linecap="round" stroke-width="25">
+<path d="M156.95 74.11 L158.74 73.23 L160.57 72.39 L162.44 71.60 L164.34 70.86 L166.28 70.18 L168.26 69.56 L170.27 69.00 L172.32 68.50 L174.41 68.08 L176.53 67.74 L178.67 67.48 L180.85 67.31 L183.05 67.23 L185.27 67.26 L187.51 67.38 L189.75 67.62 L192.01 67.96 L194.26 68.43 L196.50 69.02 L198.72 69.74 L200.92 70.58 L203.08 71.56 L205.20 72.68 L207.26 73.93 L209.26 75.31 L211.17 76.83 L213.00 78.47 L214.72 80.25 L216.33 82.15 L217.82 84.16 L219.16 86.29 L220.36 88.51 L221.40 90.82 L222.28 93.20 L222.98 95.65 L223.50 98.15 L223.84 100.68 L223.99 103.24 L223.95 105.80 L223.73 108.34 L223.31 110.87 L222.72 113.35 L221.95 115.77 L221.00 118.13 L219.90 120.40 L218.64 122.58 L217.23 124.66 L215.70 126.63 L214.04 128.48 L212.27 130.21 L210.41 131.80 L208.46 133.27 L206.44 134.60 L204.35 135.79 L202.21 136.85 L200.03 137.77 L197.82 138.57 L195.59 139.23 L193.35 139.77 L191.09 140.19 L188.84 140.49 L186.60 140.68 L184.37 140.76 L182.16 140.75 L179.97 140.63 L177.80 140.42 L175.67 140.13 L173.56 139.76 L171.49 139.31 L169.45 138.79 L167.45 138.20 L165.49 137.55 L163.56 136.84 L161.68 136.08 L159.82 135.28 L158.01 134.42 L156.23 133.52 L154.49 132.59 L152.78 131.62 L151.11 130.61 L149.47 129.58 L147.86 128.52 L146.29 127.43 L144.74 126.32 L143.22 125.19 L141.72 124.03 L140.25 122.87 L138.81 121.68 L137.38 120.49 L135.98 119.27 L134.60 118.05 L133.23 116.82 L131.88 115.58 L130.54 114.33 L129.21 113.07 L127.90 111.81 L126.60 110.54 L125.30 109.27 L124.01 108.00 L122.73 106.72 L121.44 105.44 L120.16 104.16 L118.88 102.88 L117.60 101.60 L116.32 100.33 L115.03 99.05 L113.74 97.78 L112.43 96.51 L111.12 95.25 L109.80 93.99 L108.47 92.74 L107.12 91.50 L105.75 90.26 L104.37 89.04 L102.98 87.82 L101.56 86.62 L100.12 85.43 L98.65 84.26 L97.17 83.11 L95.65 81.97" stroke="#8FB4EE"/>
+<path d="M83.05 74.11 L81.26 73.23 L79.43 72.39 L77.56 71.60 L75.66 70.86 L73.72 70.18 L71.74 69.56 L69.73 69.00 L67.68 68.50 L65.59 68.08 L63.47 67.74 L61.33 67.48 L59.15 67.31 L56.95 67.23 L54.73 67.26 L52.49 67.38 L50.25 67.62 L47.99 67.96 L45.74 68.43 L43.50 69.02 L41.28 69.74 L39.08 70.58 L36.92 71.56 L34.80 72.68 L32.74 73.93 L30.74 75.31 L28.83 76.83 L27.00 78.47 L25.28 80.25 L23.67 82.15 L22.18 84.16 L20.84 86.29 L19.64 88.51 L18.60 90.82 L17.72 93.20 L17.02 95.65 L16.50 98.15 L16.16 100.68 L16.01 103.24 L16.05 105.80 L16.27 108.34 L16.69 110.87 L17.28 113.35 L18.05 115.77 L19.00 118.13 L20.10 120.40 L21.36 122.58 L22.77 124.66 L24.30 126.63 L25.96 128.48 L27.73 130.21 L29.59 131.80 L31.54 133.27 L33.56 134.60 L35.65 135.79 L37.79 136.85 L39.97 137.77 L42.18 138.57 L44.41 139.23 L46.65 139.77 L48.91 140.19 L51.16 140.49 L53.40 140.68 L55.63 140.76 L57.84 140.75 L60.03 140.63 L62.20 140.42 L64.33 140.13 L66.44 139.76 L68.51 139.31 L70.55 138.79 L72.55 138.20 L74.51 137.55 L76.44 136.84 L78.32 136.08 L80.18 135.28 L81.99 134.42 L83.77 133.52 L85.51 132.59 L87.22 131.62 L88.89 130.61 L90.53 129.58 L92.14 128.52 L93.71 127.43 L95.26 126.32 L96.78 125.19 L98.28 124.03 L99.75 122.87 L101.19 121.68 L102.62 120.49 L104.02 119.27 L105.40 118.05 L106.77 116.82 L108.12 115.58 L109.46 114.33 L110.79 113.07 L112.10 111.81 L113.40 110.54 L114.70 109.27 L115.99 108.00 L117.27 106.72 L118.56 105.44 L119.84 104.16 L121.12 102.88 L122.40 101.60 L123.68 100.33 L124.97 99.05 L126.26 97.78 L127.57 96.51 L128.88 95.25 L130.20 93.99 L131.53 92.74 L132.88 91.50 L134.25 90.26 L135.63 89.04 L137.02 87.82 L138.44 86.62 L139.88 85.43 L141.35 84.26 L142.83 83.11 L144.35 81.97" stroke="#EE5A45"/>
+</g>
+<circle cx="83.05" cy="39.11" r="17.5" fill="#EE5A45"/>
+<circle cx="156.95" cy="39.11" r="17.5" fill="#8FB4EE"/>
+</svg>
+<text x="540" y="104" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="68" font-weight="800" fill="#141B34" letter-spacing="1">SUTRA</text>
+<text x="600" y="160" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="700" fill="#141B34">Follow-through for cancer care,</text>
+<text x="600" y="194" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="26" font-weight="700" fill="#EE5A45">on top of what a hospital already has.</text>
+<text x="600" y="232" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="14" letter-spacing="4" fill="#5A6178">ONE PATIENT  •  ONE RECORD  •  EVERY STEP</text>
+<path id="line" d="M120 300 L1080 300" stroke="#141B34" stroke-width="2.5" stroke-dasharray="8 8" fill="none">
+  <animate attributeName="stroke-dashoffset" from="0" to="-32" dur="1.2s" repeatCount="indefinite"/>
+</path>
+<g>
+  <circle cx="120" cy="300" r="9" fill="#FBF8F3" stroke="#141B34" stroke-width="2.5"/>
+  <circle cx="120" cy="300" r="5" fill="#EE5A45" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.100;0.133;0.92;1" dur="6s" repeatCount="indefinite"/></circle>
+  <text x="120" y="334" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="15" letter-spacing="2.5" fill="#141B34" font-weight="600">OPD</text>
+</g><g>
+  <circle cx="360" cy="300" r="9" fill="#FBF8F3" stroke="#141B34" stroke-width="2.5"/>
+  <circle cx="360" cy="300" r="5" fill="#EE5A45" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.250;0.283;0.92;1" dur="6s" repeatCount="indefinite"/></circle>
+  <text x="360" y="334" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="15" letter-spacing="2.5" fill="#141B34" font-weight="600">LAB</text>
+</g><g>
+  <circle cx="600" cy="300" r="9" fill="#FBF8F3" stroke="#141B34" stroke-width="2.5"/>
+  <circle cx="600" cy="300" r="5" fill="#EE5A45" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.400;0.433;0.92;1" dur="6s" repeatCount="indefinite"/></circle>
+  <text x="600" y="334" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="15" letter-spacing="2.5" fill="#141B34" font-weight="600">PLAN</text>
+</g><g>
+  <circle cx="840" cy="300" r="9" fill="#FBF8F3" stroke="#141B34" stroke-width="2.5"/>
+  <circle cx="840" cy="300" r="5" fill="#EE5A45" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.550;0.583;0.92;1" dur="6s" repeatCount="indefinite"/></circle>
+  <text x="840" y="334" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="15" letter-spacing="2.5" fill="#141B34" font-weight="600">CHEMO</text>
+</g><g>
+  <circle cx="1080" cy="300" r="9" fill="#FBF8F3" stroke="#141B34" stroke-width="2.5"/>
+  <circle cx="1080" cy="300" r="5" fill="#EE5A45" opacity="0"><animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.700;0.733;0.92;1" dur="6s" repeatCount="indefinite"/></circle>
+  <text x="1080" y="334" text-anchor="middle" font-family="'Avenir Next','Montserrat','Helvetica Neue',Arial,sans-serif" font-size="15" letter-spacing="2.5" fill="#141B34" font-weight="600">FOLLOW-UP</text>
+</g>
+<circle r="7" fill="#EE5A45"><animateMotion dur="6s" repeatCount="indefinite" keyPoints="0;1;1" keyTimes="0;0.8;1" calcMode="linear"><mpath href="#line"/></animateMotion></circle>
+</svg>

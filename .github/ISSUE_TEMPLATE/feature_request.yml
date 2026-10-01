@@ -1,0 +1,39 @@
+name: Feature or adapter request
+description: Suggest a new capability, or a connector for a hospital system.
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        SUTRA is assistive, not diagnostic. Requests for software to diagnose, prescribe, score clinical risk, interpret medical values or change a signed pathway are out of scope.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: Who is affected, and what step of care is missed or delayed today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Hospital system (for adapter requests)
+      description: For example, the EHR, scheduler, lab or pharmacy product and version.
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: boundary
+    attributes:
+      label: Safety boundary
+      options:
+        - label: People still make every clinical decision under this proposal.
+          required: true
+        - label: This request contains no real patient data.
+          required: true

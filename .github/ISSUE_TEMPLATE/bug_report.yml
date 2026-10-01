@@ -1,0 +1,58 @@
+name: Bug report
+description: Something in SUTRA does not work as documented.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use synthetic data only. Never include real patient names, identifiers, records or screenshots.
+        To report a security vulnerability, do not open an issue: email hello@sutrahealth.org as described in SECURITY.md.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did you see, and what did you expect to see?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Start the stack with `docker compose up --build`
+        2. ...
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      options:
+        - Go API
+        - Adapter or adapter contract
+        - Expo app
+        - OCR or speech service
+        - WhatsApp or Chatwoot
+        - ABDM bridge
+        - Deployment or Docker
+        - Documentation
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Remove any secrets or personal data first.
+      render: text
+  - type: checkboxes
+    id: synthetic
+    attributes:
+      label: Data
+      options:
+        - label: This report contains no real patient data.
+          required: true

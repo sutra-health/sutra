@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: mailto:hello@sutrahealth.org?subject=Security
+    about: Please report vulnerabilities privately by email, not in a public issue.
+  - name: Ask a question
+    url: mailto:hello@sutrahealth.org
+    about: For questions about piloting or deploying SUTRA.
