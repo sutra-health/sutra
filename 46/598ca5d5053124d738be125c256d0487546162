@@ -1,0 +1,31 @@
+docs/CAPABILITY_MAP.md
+  s_82db2df8477b7b::t_791cd4867c5f7a 1,3,7,9,12,16,18,20-22,24-36,38-39,41,46-48,50,55,57,66-67
+docs/DELIVERY_SCOPE.md
+  s_82db2df8477b7b::t_bd617e6abc206d 1,3,5-18,22,26,28,71,83,85,92,96,104,131,140,142,153,192,196-198,200,227,231-232,251,262,266,287,289,292,295,298
+docs/DEPLOYMENT.md
+  s_82db2df8477b7b::t_7162cf406fb5f8 47
+docs/MEENA_REFERENCE_LIFECYCLE.md
+  s_82db2df8477b7b::t_81fbea0a3841bc 3-5,45-47
+docs/PRODUCT_REQUIREMENTS.md
+  s_82db2df8477b7b::t_c1525fdcef3a85 190,341,372
+docs/WHATSAPP_ABDM_SETUP.md
+  s_82db2df8477b7b::t_37f78580a046e7 47
+examples/README.md
+  s_82db2df8477b7b::t_dbc53410ba977c 13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "46598ca5d5053124d738be125c256d0487546162",
+  "prompts": {},
+  "sessions": {
+    "s_82db2df8477b7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0f5cc-1820-7c81-8bd6-c32e9628cf87",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "charitra-prem <charitra@premai.io>"
+    }
+  }
+}
