@@ -225,7 +225,7 @@ She has conducted clinician-facing and patient-facing research to advocate for a
 
 As a second-generation doctor trained in a government institution, she knows both private and public hospitals, and brings that view to the challenges each one faces.
 
-Website: [sutrahealth.org](https://sutrahealth.org) · GitHub: [@sutrahealth](https://github.com/sutrahealth) · Email: [hello@sutrahealth.org](mailto:hello@sutrahealth.org)
+Website: [sutrahealth.org](https://sutrahealth.org) · GitHub: [@sutra-health](https://github.com/sutra-health) · Email: [hello@sutrahealth.org](mailto:hello@sutrahealth.org)
 
 ---
 
