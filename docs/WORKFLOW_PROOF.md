@@ -15,7 +15,7 @@ A screenshot proves that a surface rendered. API tests and adapter probes provid
 | Source evidence | [Evidence review](./design-targets/doctor-evidence.png) | [Desktop patient lifecycle](../artifacts/ui/meena-lifecycle-desktop.png) | Working lifecycle API and source-provenance view. OCR output remains a draft beside the original. |
 | Dictation to plan | [Voice plan confirmation](./design-targets/doctor-voice-plan.png) | [Mobile patient lifecycle](../artifacts/ui/meena-lifecycle-mobile.png) | Upload and confirmation UI is implemented. The IndicConformer service must be deployed and probed before this can be labelled live. |
 | Signed pathway | [Doctor pathway](./design-targets/doctor-pathway.png) | [Desktop patient lifecycle](../artifacts/ui/meena-lifecycle-desktop.png) | Care-plan signing, versioning, care-step state and audited transitions are server-backed. |
-| Prescription | [Doctor prescription](./design-targets/doctor-prescription.png) | No matching runtime capture committed | Doctor-authored versioning is server-backed. EHR or pharmacy write-back stays disabled unless an adapter advertises `prescription.write`. |
+| Prescription | [Doctor prescription](./design-targets/doctor-prescription.png) | No matching runtime capture committed | Doctor-authored versioning is server-backed. EHR or pharmacy write-back stays disabled unless an adapter advertises `prescription.write`; no bundled adapter does yet. Sending the signed prescription to the hospital pharmacy through such an adapter is pilot scope (see [Delivery scope](./DELIVERY_SCOPE.md)). |
 
 ## Hospital operations
 

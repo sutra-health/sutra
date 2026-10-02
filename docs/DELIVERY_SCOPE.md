@@ -17,7 +17,9 @@ Terms used in this document:
 
 ## 1. Product focus
 
-SUTRA addresses doctor-facing **Patient Follow-up and Continuity of Care**. It assists with documentation, navigation, booking, evidence collection and operational handoff. It does not diagnose, prescribe, replace clinical judgment, act as clinical decision support, interpret medical data or score risk.
+SUTRA addresses doctor-facing **Patient Follow-up and Continuity of Care**. It assists with documentation, navigation, booking, evidence collection and operational handoff. It never diagnoses, prescribes, scores risk or interprets a medical value, and it does not replace clinical judgment or act as clinical decision support. The clinician decides.
+
+For a report such as the CBC before a chemotherapy cycle, the flow is: the report is received, the treating doctor reviews it and clears the cycle, and only then does the chemotherapy go ahead. SUTRA tracks whether a report has arrived, when, and where each step stands. It does not interpret the result.
 
 The reference implementation uses only synthetic data. The demonstration environment uses OpenMRS Mini, an open-source electronic health record (EHR), because it is an accessible system against which the team can demonstrate a real read and a real appointment write. SUTRA itself is vendor-neutral and communicates with hospital systems through a Go/protobuf adapter contract.
 
@@ -36,13 +38,15 @@ The reference implementation must complete one narrow closed loop:
 7. Offer slots returned by the reference scheduler and make one idempotent booking request.
 8. Send confirmation only after the source returns a booked-equivalent status and external ID.
 9. Upload a synthetic CBC report, preserve the original, extract bounded fields and require identity/date/type verification.
-10. Show the original report to the doctor, who records the decision.
+10. Show the original report to the treating doctor, who reviews it and records whether the cycle is cleared to go ahead.
 11. Answer a plan question with an exact signed-plan line.
 12. Turn a symptom or medicine question into a human task without automated advice.
-13. Show casualty and 112 from an explicit emergency action. Optionally demonstrate the clinician-authored phrase safety net.
+13. Show casualty and 112 from an explicit emergency action. Optionally demonstrate the hospital-defined safety escalation phrase list.
 14. Show the append-only event history and calculate the primary KPI.
 
 ### Supervised 90-day pilot
+
+The pilot runs for 90 days in one oncology unit and is measured by one number: the share of planned next steps done inside the window the doctor set.
 
 - Real hospital setup and staff approval.
 - Four-week retrospective baseline from the site's existing register.
@@ -53,13 +57,21 @@ The reference implementation must complete one narrow closed loop:
 - Clinician-approved Program Studio changes.
 - Staff-work measurement and weekly manager summary.
 - Site security, privacy, retention and backup review.
-- Optional ABDM sandbox work before any approved production integration.
+- ABDM sandbox integration before any approved production integration: a patient registers with a phone number and an OTP, and records are fetched and uploaded. ABHA linking is the default at registration, with the patient's consent.
+- Electronic prescription to the hospital pharmacy: the doctor's signed medicine lines are sent as a FHIR prescription in the format ABDM uses, only through a pharmacy adapter that advertises `prescription.write`. This needs the hospital's pharmacy system and its consent policy. It is not yet implemented in the reference build: signing stores a versioned SUTRA prescription and records `writeBack: not_requested`, and no bundled adapter advertises `prescription.write`.
+- Plain-word analyst questions: analysts ask in plain words and get a count and a list, shown with the query that produced it. This is provided by our separate agent platform, which is not in this repository, through a read-only connection to the SUTRA event ledger. Answers only count and list operational states; they never score or rank a patient.
+
+### Pilot timeline
+
+- By the end of the build sprint on 8 November 2026: the reference build is connected to a live WhatsApp number and to the ABDM sandbox.
+- 28 November 2026: if SUTRA is selected for the Health-a-thon 2026 finale, the demonstration there runs that hardened build on synthetic data.
+- The 90-day pilot starts only after a hospital signs up and its site, security and clinical reviews pass. No pilot has started yet.
 
 ### Roadmap
 
 - Additional EHR, HIS, LIS, pharmacy and scheduler adapters.
 - Cross-hospital record retrieval through properly consented ABDM flows.
-- Electronic prescription transmission under applicable policy and consent.
+- Electronic prescription to further pharmacy systems beyond the pilot site's, under each hospital's policy and consent.
 - IPD discharge, ANC, diabetes, surgery and other program packs.
 - Production voice-note transcription and broader language coverage.
 - IVR after measured evidence of a WhatsApp access gap.
@@ -87,21 +99,22 @@ The reference implementation must complete one narrow closed loop:
 | Clinical-value extraction | No | No | Possible research only | Never used for a clinical decision without separate approval |
 | Exact signed-plan answer | Yes | Yes |  | Retrieval only |
 | Human clinical handoff | Yes | Yes |  | No automated clinical answer |
-| Deterministic role routing | Yes | Yes |  | Deadline/SLA, not severity |
-| Emergency signposting | Yes | Yes |  | Fixed casualty and 112 message |
+| Deterministic role routing | Yes | Yes |  | Deadline/SLA, not severity; models tag topic only |
+| Safety escalation (hospital-defined) | Yes | Yes |  | Pre-approved phrases send the fixed casualty and 112 message and route to the nurse on duty |
 | Clinical triage or risk score | No | No | No within SUTRA's stated product boundary | Out of scope at every stage |
 | Admin primary KPI | Yes | Yes |  | Must show denominator and source |
 | Preset operational questions | Yes | Yes |  | Count/list only |
-| Free-form natural-language SQL | No | Limited after security review | Possible | Not required for the product claim |
+| Plain-word analyst questions | Not in this repository | Yes, through the separate agent platform | Yes | Read-only connection to the event ledger; every answer is a count and a list shown with its query; never scores or ranks a patient |
+| Unrestricted natural-language SQL or writes | No | No | No | Answers are limited to counts and lists over a read-only connection |
 | ABDM M1/M2/M3 | Mock or disabled | Sandbox/approved scope | Yes | Not required for the core reference flow |
-| OpenELIS or pharmacy integration | No | Optional site work | Yes | Do not claim it is bundled with OpenMRS Mini |
-| E-prescription transmission | No | No initial pilot | Yes | Requires policy, consent and system integration |
+| OpenELIS (lab) integration | No | Optional site work | Yes | Do not claim it is bundled with OpenMRS Mini |
+| E-prescription to the hospital pharmacy | Doctor signing only; no transmission | Yes, through an adapter that advertises `prescription.write` | Yes | Doctor-signed lines only, as a FHIR prescription in the format ABDM uses. Needs the hospital's pharmacy system and its consent policy. Not yet implemented in the reference build |
 | MCP adapter tools | No | Optional read-only preview | Yes | Not in the runtime care path |
 | Predictive no-show or utilization model | No | No | Conditional | Requires later governance and validation |
 
-## 4. Safety correction: routing, not clinical triage
+## 4. Safety escalation and routing, not clinical triage
 
-SUTRA routes family questions to people. Product and public language must not describe this as AI clinical triage.
+SUTRA routes family questions to people. Product and public language must not describe this as AI clinical triage. The hospital defines the safety escalation: a message that matches a phrase the hospital has pre-approved goes at once to the casualty number, 112 and the nurse on duty, with no model involved. Models sort messages by topic only, never by severity.
 
 ### Allowed behavior
 
@@ -112,7 +125,7 @@ SUTRA routes family questions to people. Product and public language must not de
 | `Cannot attend` or `Need help` | Record the barrier and create a role task with a deadline | Configured operational role |
 | Symptom, medicine, uncertainty or unknown | Acknowledge and defer to human review | Nurse or doctor according to clinician-approved site policy |
 | Explicit `Emergency` action | Immediately show hospital casualty contact and 112; optionally alert the duty queue | Existing hospital emergency process |
-| Clinician-authored emergency phrase match | Show the same fixed emergency message and alert the duty queue | Existing hospital emergency process |
+| Safety escalation: a phrase the hospital pre-approved matches | Show the same fixed casualty and 112 message at once and route to the nurse on duty | Existing hospital emergency process |
 
 ### Prohibited behavior
 
@@ -124,7 +137,7 @@ SUTRA routes family questions to people. Product and public language must not de
 - Queue ordering from a model's judgment of illness.
 - A generated clinical response to the patient or caregiver.
 
-The phrase safety net is not a complete emergency detector. It must never be presented as one. The emergency action and disclaimer remain visible regardless of classification.
+The safety escalation phrase list is not a complete emergency detector. It must never be presented as one. The emergency action and disclaimer remain visible regardless of classification.
 
 ## 5. OCR and speech scope
 
@@ -267,7 +280,9 @@ The reference implementation was built in the following five-week order. It is k
 - “The hospital EHR remains the authority for patient identity and clinical records.”
 - “The scheduler remains the authority for confirmed bookings.”
 - “SUTRA transcribes and extracts drafts; people confirm clinical content.”
-- “SUTRA routes by clinician-approved operational rules and sends clinical content to a person.”
+- “SUTRA routes by clinician-approved operational rules and sends clinical content to a person. Models sort messages by topic only, never by severity.”
+- “Hospital-defined safety escalation sends messages that match pre-approved phrases to the casualty number, 112 and a nurse at once.”
+- “SUTRA tracks whether a report has arrived, when, and where each step stands. It does not interpret the result; the treating doctor clears the cycle.”
 - “Emergency messages receive fixed casualty and 112 signposting. SUTRA does not provide emergency care.”
 - “The pilot measures required steps completed inside the clinician-approved window with verified evidence.”
 
@@ -293,7 +308,7 @@ The reference implementation was built in the following five-week order. It is k
 - At least one real read and one real appointment write occur through the reference adapter.
 - Speech and OCR visibly require human confirmation.
 - The reference implementation contains no diagnosis, report interpretation, treatment recommendation, clinical risk score or autonomous advice.
-- The emergency path is described as signposting, not triage.
+- The emergency path is described as hospital-defined safety escalation and signposting, not triage.
 - The primary KPI has a numerator, denominator, evidence source and baseline method.
 - Mock, reference, pilot and roadmap functionality are labelled honestly.
 - The public repository includes license, reproducible setup, seed data, reset instructions and failure-mode instructions.

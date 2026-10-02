@@ -128,7 +128,7 @@ Use hospital-approved deterministic rules before optional typed classification.
 
 | Condition | Automated action | Human destination |
 |---|---|---|
-| User selects Emergency or an exact clinician-authored safety phrase matches | Send fixed emergency notice; create immediate alert | Duty nurse/casualty process |
+| User selects Emergency, or safety escalation: an exact phrase the hospital pre-approved matches | Send fixed casualty and 112 notice at once; create immediate alert | Duty nurse/casualty process |
 | Symptom or medicine content | Acknowledge receipt without advice | Nurse or doctor per approved role map |
 | Appointment request | Create scheduling task | Scheduling team |
 | Document upload/question | Create evidence/records task | Records team |
@@ -235,7 +235,7 @@ M1 supports patient registration and verified identity association.
 
 Implementation flow:
 
-1. Staff explains that ABHA is optional and obtains the required patient participation/consent.
+1. Staff explains that ABHA linking is the default at registration and obtains the patient's consent before linking. Care never depends on it.
 2. The M1 component initiates an approved creation, login or verification flow.
 3. OTP/Aadhaar details remain inside the approved M1 flow and are never sent to SUTRA logs or databases.
 4. On successful verification, the EHR adapter writes or links:

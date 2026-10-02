@@ -63,8 +63,8 @@ Out of scope by default:
 
 - autonomous clinical triage;
 - report-value interpretation;
-- prescription generation/transmission;
-- unrestricted natural-language chart queries;
+- prescription generation by software (sending the doctor's signed prescription to the pharmacy is pilot scope only through an adapter that advertises `prescription.write`, with the hospital's pharmacy system and consent policy in place);
+- unrestricted natural-language chart queries (plain-word analyst questions answered as counts and lists, with the query shown, over a read-only connection to the event ledger are pilot scope);
 - automatic merge of ABDM external records; and
 - more than one clinical pathway before the first is stable.
 

@@ -241,7 +241,7 @@ The production protobuf definitions are versioned artifacts. The sample above es
 2. Show unresolved steps after seven days, missing prerequisites, booking failures, barrier-resolution time, staff work and source-interface health.
 3. Provide source drill-through and an audit export.
 4. Provide a bounded catalog of operational questions for the demo.
-5. Free-form language must not execute unrestricted SQL or expose cross-role data.
+5. In the pilot, analysts may ask in plain words through the separate agent platform, over a read-only connection to the event ledger. Every answer is a count and a list, shown with the query that produced it. Free-form language must not execute unrestricted SQL, write data or expose cross-role data.
 6. Never produce a clinical risk ranking.
 
 ### FR-16: Audit, correction and provenance
