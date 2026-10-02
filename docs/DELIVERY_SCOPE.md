@@ -64,7 +64,7 @@ The pilot runs for 90 days in one oncology unit and is measured by one number: t
 ### Pilot timeline
 
 - By the end of the build sprint on 8 November 2026: the reference build is connected to a live WhatsApp number and to the ABDM sandbox.
-- 28 November 2026: if SUTRA is selected for the Health-a-thon 2026 finale, the demonstration there runs that hardened build on synthetic data.
+- 28 November 2026: the Health-a-thon 2026 finale demonstration runs that hardened build on synthetic data.
 - The 90-day pilot starts only after a hospital signs up and its site, security and clinical reviews pass. No pilot has started yet.
 
 ### Roadmap

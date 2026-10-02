@@ -106,7 +106,7 @@ This repository is a **reference implementation**. It runs end to end on **synth
 The planned pilot runs for 90 days in one oncology unit and is measured by one number: the share of planned next steps done inside the window the doctor set. No pilot has started yet.
 
 - By the end of the build sprint on 8 November 2026, the reference build will be connected to a live WhatsApp number and to the ABDM sandbox, where a patient registers with a phone number and an OTP and records are fetched and uploaded. ABHA linking is the default at registration, with the patient's consent.
-- If SUTRA is selected for the Health-a-thon 2026 finale on 28 November, the demonstration there will run that hardened build.
+- At the Health-a-thon 2026 finale on 28 November, the demonstration will run that hardened build.
 - Pilot scope also covers sending the doctor's signed prescription to the hospital pharmacy through a `prescription.write` adapter, and plain-word analyst questions answered as counts and lists through our separate agent platform. Neither is in this repository yet.
 
 ## Quick start
